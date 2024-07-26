@@ -1,0 +1,21 @@
+version: "3"
+services:
+  realsense:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: /bin/bash
+    privileged: true
+    network_mode: host
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev:/dev
+      # mount launch file
+      - ../tko_rs_cam:/catkin_ws/src/tko_rs_cam:rw
+  rs_multi_launch:
+    extends: realsense
+    command: roslaunch tko_rs_cam rs_multi.launch
+
