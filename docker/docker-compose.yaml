@@ -13,8 +13,9 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /dev:/dev
-      # mount launch file
+      # mount tko_rs_cam pkg to the container
       - ../tko_rs_cam:/catkin_ws/src/tko_rs_cam:rw
+
   rs_multi_launch:
     extends: realsense
     command: roslaunch tko_rs_cam rs_multi.launch
