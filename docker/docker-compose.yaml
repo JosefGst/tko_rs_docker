@@ -10,13 +10,32 @@ services:
     environment:
       - DISPLAY
       - QT_X11_NO_MITSHM=1
+      - ROS_MASTER_URI
+      - ROS_IP
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /dev:/dev
       # mount tko_rs_cam pkg to the container
       - ../tko_rs_cam:/catkin_ws/src/tko_rs_cam:rw
 
-  rs_multi_launch:
+  cameraf_down:
     extends: realsense
-    command: roslaunch tko_rs_cam rs_multi.launch
+    command: roslaunch tko_rs_cam cameraF_down.launch 
+
+  cameraf:
+    extends: realsense
+    command: roslaunch tko_rs_cam cameraF.launch
+
+  cameral:
+    extends: realsense
+    command: roslaunch tko_rs_cam cameraL.launch
+
+  camerar:
+    extends: realsense
+    command: roslaunch tko_rs_cam cameraR.launch
+
+  camerab:
+    extends: realsense
+    command: roslaunch tko_rs_cam cameraB.launch 
+
 
